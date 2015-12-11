@@ -1,40 +1,19 @@
-<h2>Create</h2>
-<?php echo form_open('Main_controller/add_news')?>
-<p>
-	<label for="title">Virsraksts:</label>
-	<input type="text" name="title" id="title"/>
-</p>
-<p>
-	<label for="description">Apraksts:</label>
-	<textarea name="description" id="description"></textarea>
-</p>
-<p>
-	<input type="submit" value="Saglabāt"/>
-</p>
-<?php echo form_close();?>
+<div class="jumbotron"></div>
+<div class="container">
+	<hr/>
+	<h2>Read</h2>
+	<?php if(isset($records)) : foreach ($records as $row ) : ?>
 
-<hr/>
-<h2>Read</h2>
-<?php if(isset($records)) : foreach ($records as $row ) : ?>
+	<h2><?php echo anchor("Main_controller/show_news/$row->Id" , $row->Title)?></h2>
+	<p><?php echo $row->Date ?></p>
+	<p><?php echo anchor("Main_controller/delete_news/$row->Id" , "Delete")?></p>
+	<div><?php echo $row->Description?></div>
+	<?php endforeach; ?>
 
-<h2><?php echo anchor("Main_controller/delete_news/$row->Id" , $row->Title)?></h2>
-<div><?php echo $row->Description?></div>
-<?php endforeach; ?>
+	<?php else : ?>
 
-<?php else : ?>
+	<h2>Nav jaunumu.</h2>
 
-<h2>Nav jaunumu.</h2>
-
-<?php endif; ?>
-
-<hr/>
-
-<h2>Delete</h2>
-<button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-</button>
-<p>To sample the delete method, simplu click on one if the headins listed above. A delete query will automaticly run.</p>
-<div class="row">
-	<div class="col-md-8">.col-md-8</div>
-	<div class="col-md-4">.col-md-4</div>
+	<?php endif; ?>
+	<h2><?php echo anchor("Main_controller/goto_create_news" , "Izveidot jaunu ierakstu.")?></h2>
 </div>

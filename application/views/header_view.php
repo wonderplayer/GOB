@@ -11,6 +11,9 @@
 	<style>
 		label{
 			display: block;
+		};
+		body{
+			padding-top: 65px;
 		}
 	</style>
 </head>
@@ -25,15 +28,26 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="http://localhost/GOB/index.php/Main_controller/index">Guns Of Bang</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+        	<ul class="nav navbar-nav">
+		    <li class="nav-item">
+		      <?php echo anchor("Main_controller/index" , "Jaunumi")?>
+		    </li>
+		    <li class="nav-item">
+		      <?php echo anchor("Main_controller/goto_shop" , "Veikals")?>
+		    </li>
+		    <li class="nav-item">
+		      <?php echo anchor("Main_controller/goto_forums" , "Forums")?>
+		    </li>
+		  </ul>
           <form class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+              <input type="text" placeholder="Epasts" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input type="password" placeholder="Parole" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
           </form>
