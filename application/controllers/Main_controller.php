@@ -9,7 +9,9 @@
 			{
 				$data['records'] = $query;
 			}
+			$this->load->view('header_view', $data);
 			$this->load->view('home_view', $data);
+			$this->load->view('footer_view', $data);
 		}
 
 		function add_news()
