@@ -42,7 +42,7 @@
 		      <?php echo anchor("Main_controller/goto_forums" , "Forums")?>
 		    </li>
 		  </ul>
-          <form class="navbar-form navbar-right">
+          <!--<form class="navbar-form navbar-right">
             <div class="form-group">
               <input type="text" placeholder="Epasts" class="form-control">
             </div>
@@ -50,7 +50,19 @@
               <input type="password" placeholder="Parole" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
+          </form>-->
+          <?php if($this->session->userdata('is_logged_in') == true){ 
+
+        ?>
+        <p style = "color:white;">Hello, </p>
+        <input type="button" onclick="location.href='<?php echo base_url()?>index.php/Main_controller/logout';" value="Iziet" />
+        <?php
+      		} else { ?>
+      			<input type="button" onclick="location.href='<?php echo base_url()?>index.php/Main_controller/goto_login_view';" value="Ieiet" />
+          	<input type="button" onclick="location.href='<?php echo base_url()?>index.php/Main_controller/goto_registration_view';" value="Reģistrēties" />
+          	<?php } ?>
+      		
+          
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
