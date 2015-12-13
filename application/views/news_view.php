@@ -1,4 +1,3 @@
-<div class="jumbotron"></div>
 <div class="container">
 <?php if(isset($records)) : foreach ($records as $row ) : ?>
 
@@ -6,8 +5,10 @@
 	<p><?php echo $row->Date ?></p>
 	<div><?php echo $row->Description?></div>
 	<hr>
-	<p><?php echo anchor("Main_controller/delete_news/$row->Id" , "Delete")?></p>
-	<p><?php echo anchor("Main_controller/goto_update_news/$row->Id" , "Update")?></p>
+	<?php if($this->session->userdata('is_logged_in') == true): ?> 
+		<p><?php echo anchor("Main_controller/delete_news/$row->Id" , "Delete")?></p>
+		<p><?php echo anchor("Main_controller/goto_update_news/$row->Id" , "Update")?></p>
+	<?php endif;?>
 	<?php endforeach; ?>
 
 	<?php else : ?>

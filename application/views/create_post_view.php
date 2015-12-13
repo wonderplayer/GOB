@@ -1,6 +1,6 @@
 <div class="container">
 	<h2>Create</h2>
-	<?php echo form_open('Main_controller/add_news')?>
+	<?php echo form_open('Main_controller/create_post')?>
 	<p>
 		<label for="title">Virsraksts:</label>
 		<input type="text" name="title" id="title"/>

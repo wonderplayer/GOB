@@ -24,8 +24,9 @@
 			$query = $this->db->get('users');
 			if($query->num_rows() == 1 )
 			{
-				return $query;
+				return $query->result();
 			}
+			return 'nothing';
 		}
 
 		function create_user()
