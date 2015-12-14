@@ -9,7 +9,7 @@
 	<p><?php echo $row->Date ?></p>
 	<div><?php echo ellipsize($row->Description, 200, 1)?></div>
 	<?php if($this->session->userdata('is_logged_in') == true): ?> 
-		<p><?php echo anchor("Main_controller/delete_news/$row->Id" , "Delete")?></p>
+		<p><?php echo form_button('delete',"Dzēst",'onclick="javascript:confirmation_news(' . $row->Id . ');"');?></p>
 	<?php endif;?>
 	<?php endforeach; ?>
 

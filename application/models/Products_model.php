@@ -40,4 +40,43 @@ class Products_model extends CI_Model
 		$this->db->insert('equipment_buying', $data);
 		return;
 	}
+
+	function insert_rarity($data)
+	{
+		$this->db->insert('rarity', $data);
+		return;
+	}
+
+	function insert_type($data)
+	{
+		$this->db->insert('equipment_type', $data);
+		return;
+	}
+
+	function insert_equipment($data)
+	{
+		$this->db->insert('equipment', $data);
+		return;
+	}
+
+	function delete_rarity()
+	{
+		$this->db->where('Id', $this->uri->segment(3));
+		$this->db->delete('rarity');
+		return;
+	}
+
+	function delete_type()
+	{
+		$this->db->where('Id', $this->uri->segment(3));
+		$this->db->delete('equipment_type');
+		return;
+	}
+
+	function delete_equipment()
+	{
+		$this->db->where('Id', $this->uri->segment(3));
+		$this->db->delete('equipment');
+		return;
+	}
 }

@@ -1,4 +1,7 @@
 <div class='container'>
+		<?php if($this->session->userdata('is_logged_in') == true): ?> 
+			<h3><?php echo anchor("Main_controller/goto_create_equipment" , "Ievietot ekipējumu")?></h3>
+		<?php endif;?>
 		<?php echo form_open('Main_controller/search_product');?>
 			<div class="form-group has-feedback" style="width:20%";>
 				<input type="text" class="form-control" placeholder="Meklēšana" name="search" />
@@ -35,6 +38,7 @@
 						{
 							echo form_submit('action', 'Pievienot grozam');
 						}
+						echo form_button('delete',"Dzēst",'onclick="javascript:confirmation_equipment(' . $product->Id . ');"');
 						echo form_close();
 					?>
 				</li>

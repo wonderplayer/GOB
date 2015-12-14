@@ -348,7 +348,10 @@
 		function show_post()
 		{
 			$data = array();
-
+			$data['username'] = array();
+			$data['user_id'] = array();
+			$data['comments'] = array();
+			$data['post'] = array();
 			if($post = $this->Forum_model->get_post())
 			{
 				$data['post'] = $post;
@@ -356,9 +359,11 @@
 			if($comments = $this->Forum_model->get_comments())
 			{
 				$data['comments'] = $comments;
+				if($userid = $this->Forum_model->get_all_users_who_commented($comments[0]->Post_Id))
+				{
+					$data['user_id'] = $userid;
+				}
 			}
-			$data['user_id'] = $this->Forum_model->get_all_users_who_commented($comments[0]->Post_Id);
-			$data['username'] = array();
 			foreach ($data['user_id'] as $user) {
 				array_push($data['username'] , $this->Forum_model->get_user_by_id($user->User_Id));
 			}
@@ -415,10 +420,11 @@
 		//Deletes comment
 		function delete_comment()
 		{
-			$this->Forum_model->delete_comment();
-			$this->load->view('header_view');
-			$this->load->view('succ_comment_delete_view');
-			$this->load->view('footer_view');
+			$query = $this->Forum_model->delete_comment();
+			$id = $query;
+			echo '<pre>';
+			print_r($id);
+			redirect("Main_controller/show_post/" . $id[0]->Post_Id);
 		}
 
 		//Go to cart
@@ -471,4 +477,91 @@
 			$this->load->view('succ_buying_view');
 			$this->load->view('footer_view');
 		}
+
+		//Go to inserting equipment, equipment type, equipment rarity
+		function goto_create_equipment()
+		{
+			$data['rarity'] = $this->Products_model->get_rarity();
+			$data['type'] = $this->Products_model->get_type();
+
+			$this->load->view('header_view');
+			$this->load->view('create_equipment_view',$data);
+			$this->load->view('footer_view');
+		}
+
+		//Add equipment to database
+		function add_equipment()
+		{
+			$data = array(
+				'Name' => $this->input->post('name'),
+				'Equipment_type_Id' => $this->input->post('type'),
+				'Rarity_Id' => $this->input->post('rarity'),
+				'Game_price' => $this->input->post('game_price'),
+				'Market_price' => $this->input->post('market_price')
+			);
+			$this->Products_model->insert_equipment($data);
+			redirect('Main_controller/goto_succ_equip_adding');
+		}
+
+		//Add equipment type to database
+		function add_equipment_type()
+		{
+			$data['Type'] = $this->input->post('name');
+			$this->Products_model->insert_type($data);
+			redirect('Main_controller/goto_succ_type_added');
+		}
+
+		//Add equipment rarity to database
+		function add_equipment_rarity()
+		{
+			$data['Rarity'] = $this->input->post('name');
+			$this->Products_model->insert_rarity($data);
+			redirect('Main_controller/goto_succ_rarity_added');
+		}
+
+		//Delete equipment rarity
+		function delete_rarity()
+		{
+			$this->Products_model->delete_rarity();
+			redirect('Main_controller/goto_create_equipment');
+		}
+
+		//Delete equipment type
+		function delete_type()
+		{
+			$this->Products_model->delete_type();
+			redirect('Main_controller/goto_create_equipment');
+		}
+
+		//Delete equipment
+		function delete_equipment()
+		{
+			$this->Products_model->delete_equipment();
+			redirect('Main_controller/goto_shop');
+		}
+
+		//Go to successfuly added equipment
+		function goto_succ_equip_adding()
+		{
+			$this->load->view('header_view');
+			$this->load->view('succ_equipment_added_view');
+			$this->load->view('footer_view');
+		}
+
+		//Go to successfuly added equipment type
+		function goto_succ_type_added()
+		{
+			$this->load->view('header_view');
+			$this->load->view('succ_type_added_view');
+			$this->load->view('footer_view');
+		}
+
+		//Go to successfuly added equipment rarity
+		function goto_succ_rarity_added()
+		{
+			$this->load->view('header_view');
+			$this->load->view('succ_rarity_added_view');
+			$this->load->view('footer_view');
+		}
+
 	}

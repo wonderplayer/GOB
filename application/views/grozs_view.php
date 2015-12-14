@@ -70,7 +70,7 @@
 				<?php echo form_close(); ?>
 			</table>
 		</div>
+	<?php else :?>
+		<h2>Grozs ir tukšs.</h2>
 	<?php endif;?>
-	<pre>
-		<?php print_r($cart)?>
 </div>

@@ -8,7 +8,7 @@
 		<p id="description"><?php echo ellipsize($row->Description, 50, .5); ?></p>
 		<p><?php echo $row->Date ?></p>
 		<?php if($this->session->userdata('is_logged_in') == true): ?> 
-			<p><?php echo anchor("Main_controller/delete_post/$row->Id" , "Delete")?></p>
+			<p><?php echo form_button('delete',"Dzēst",'onclick="javascript:confirmation_post(' . $row->Id . ');"');?></p>
 		<?php endif;?>
 		
 	<?php endforeach; ?>

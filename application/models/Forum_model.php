@@ -23,6 +23,7 @@ class Forum_model extends CI_Model
 	{
 		$this->db->where('Id', $this->uri->segment(3));
 		$this->db->delete('posts');
+
 	}
 
 	function insert_post($data)
@@ -47,7 +48,10 @@ class Forum_model extends CI_Model
 	function delete_comment()
 	{
 		$this->db->where('Id', $this->uri->segment(3));
+		$query = $this->db->get('comments');
+		$this->db->where('Id', $this->uri->segment(3));
 		$this->db->delete('comments');
+		return $query->result();
 	}
 
 	function get_user_by_id($Id)

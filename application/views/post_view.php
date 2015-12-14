@@ -13,6 +13,7 @@
 		<p id = "comment"><?php echo $comment->Comment; ?></p>
 		<?php if($this->session->userdata('is_logged_in') == true): ?> 
 			<p><?php echo anchor("Main_controller/delete_comment/$comment->Id" , "Delete")?></p>
+			<p><?php echo form_button('delete',"Dzēst",'onclick="javascript:confirmation_comment(' . $comment->Id . ');"');?></p>
 		<?php endif;?>
 	<?php endforeach; ?>
 	<?php else : ?>
