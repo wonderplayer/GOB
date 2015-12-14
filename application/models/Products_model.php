@@ -34,4 +34,10 @@ class Products_model extends CI_Model
 		$results = $this->db->get('equipment')->result();
 		return $results;
 	}
+
+	function buying($data)
+	{
+		$this->db->insert('equipment_buying', $data);
+		return;
+	}
 }

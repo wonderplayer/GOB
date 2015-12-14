@@ -2,7 +2,6 @@
 	<?php if ($cart = $this->cart->contents()): ?>
 		<div id='cart'>
 			<table>
-				<caption>Grozs</caption>
 				<thead>
 					<tr>
 						<th>Nosaukums</th>
@@ -14,7 +13,7 @@
 						<th></th>
 					</tr>
 				</thead>
-			<?php echo form_open('Main_controller/update_cart');?>
+			<?php echo form_open('Main_controller/buy');?>
 				<?php foreach ($cart as $item): ?>
 				<?php
 					echo form_hidden('cart[' . $item['id'] . '][id]', $item['id']);
@@ -41,30 +40,16 @@
 								}
 							}?>
 						</td>
-						<td>
-							<?php
-								$attributes = array(
-									'name' => 'cart[' . $item['id'] . '][qty]',
-									'value' => $item['qty'],
-									'maxlength' => 2,
-									'style' => "width:20px;"
-								);
-								echo form_input($attributes);
-							?>
-						</td>
+						<td><?php echo $item['qty']; ?></td>
 						<td>€<?php echo $item['price']; ?></td>
 						<td>€<?php echo $item['subtotal']; ?></td>
-						<td class='remove'><?php echo anchor('Main_controller/remove_from_cart/' .$item['rowid'],'X'); ?></td>
 					</tr>
 				<?php endforeach;?>
 				<tr class='total'>
 					<td colspan="2"><strong>Kopā</strong></td>
 					<td>€<?php echo $this->cart->total(); ?></td>
 					<td>
-						<input type="submit" value="Pārrēķināt grozu">
-					</td>
-					<td>
-						<input type="button" onclick="location.href=<?php base_url()?>'checkout'" value="Pasūtīt">
+						<input type="submit" value="Pirkt">
 					</td>
 				</tr>
 				<?php echo form_close(); ?>

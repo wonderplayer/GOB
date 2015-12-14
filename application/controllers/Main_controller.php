@@ -293,6 +293,28 @@
 			redirect('Main_controller/goto_grozs');
 		}
 
+		//Updates cart
+		function update_cart()
+		{
+			$cart_info = $_POST['cart'];
+			foreach ($cart_info as $id => $cart) {
+				$rowid = $cart['rowid'];
+				$price = $cart['price'];
+				$amount = $price * $cart['qty'];
+				$qty = $cart['qty'];
+
+				$data = array(
+					'rowid' => $rowid,
+					'price' => $price,
+					'amount' => $amount,
+					'qty' => $qty
+				);
+
+				$this->cart->update($data);
+			}
+			redirect('Main_controller/goto_grozs');
+		}
+
 		//Search product name
 		function search_product()
 		{
@@ -399,6 +421,7 @@
 			$this->load->view('footer_view');
 		}
 
+		//Go to cart
 		function goto_grozs()
 		{
 			$data['rarity'] = $this->Products_model->get_rarity();
@@ -406,6 +429,46 @@
 
 			$this->load->view('header_view');
 			$this->load->view('grozs_view',$data);
+			$this->load->view('footer_view');
+		}
+
+		//Go to checkout
+		function checkout()
+		{
+			$data['rarity'] = $this->Products_model->get_rarity();
+			$data['type'] = $this->Products_model->get_type();
+
+			$this->load->view('header_view');
+			$this->load->view('checkout_view',$data);
+			$this->load->view('footer_view');
+		}
+
+		//Buy
+		function buy()
+		{
+			$cart_info = $_POST['cart'];
+			foreach ($cart_info as $id => $cart) {
+				$User_Id = $this->session->userdata('Id');
+				$Equipment_Id = $cart['id'];
+				$qty = $cart['qty'];
+
+				$data = array(
+					'Quantity' => $qty,
+					'User_Id' => $User_Id,
+					'Equipment_Id' => $Equipment_Id
+				);
+
+				$this->Products_model->buying($data);
+			}
+			$this->cart->destroy();
+			redirect('Main_controller/goto_succ_buy');
+		}
+
+		//Go to successful buying view
+		function goto_succ_buy()
+		{
+			$this->load->view('header_view');
+			$this->load->view('succ_buying_view');
 			$this->load->view('footer_view');
 		}
 	}
