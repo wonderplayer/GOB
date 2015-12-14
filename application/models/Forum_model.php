@@ -49,4 +49,19 @@ class Forum_model extends CI_Model
 		$this->db->where('Id', $this->uri->segment(3));
 		$this->db->delete('comments');
 	}
+
+	function get_user_by_id($Id)
+	{
+		$this->db->where('Id', $Id);
+		$query = $this->db->get('users');
+		return $query->result();
+	}
+
+	function get_all_users_who_commented($post_id)
+	{
+		$this->db->where('Post_Id', $post_id);
+		$this->db->group_by('User_Id');
+		$query = $this->db->get('comments');
+		return $query->result();
+	}
 }

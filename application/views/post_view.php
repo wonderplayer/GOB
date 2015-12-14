@@ -2,7 +2,13 @@
 	<h2 name="title" id="title"><?php echo $post[0]->Title; ?></h2>
 	<p id="description"><?php echo $post[0]->Description; ?></p>
 	<?php if(isset($comments)) : foreach ($comments as $comment ) : ?>
-		<h3 id = "user"><?php echo $comment->User_Id; ?></h3>
+		<h3 id = "user">
+			<?php foreach ($username as $user) {
+			if ($comment->User_Id == $user[0]->Id) {
+				echo $user[0]->Username;
+			}
+		}?>
+		</h3>	
 		<p id = "date"><?php echo $comment->Date; ?></p>
 		<p id = "comment"><?php echo $comment->Comment; ?></p>
 		<?php if($this->session->userdata('is_logged_in') == true): ?> 
@@ -29,6 +35,5 @@
 		echo form_textarea($attributes);
 		echo form_submit('submit', 'Ok');
 		echo form_close();
-	
 	?>
 </div>

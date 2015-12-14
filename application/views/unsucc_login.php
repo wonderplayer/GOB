@@ -18,7 +18,6 @@
     #products ul{
       list-style: none;
     }
-
 	</style>
 </head>
 <body>
@@ -118,9 +117,8 @@
               <button type="submit" class="btn btn-success">Sign in</button>
             </form>-->
           	<?php } ?>
-      		
-          
         </div><!--/.navbar-collapse -->
+        <p style="color:red;">Epasts vai parole nav pareiza!</p>
       </div>
     </nav>
 </header>

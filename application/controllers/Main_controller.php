@@ -117,15 +117,23 @@
 			}
 			else
 			{
-				$this->goto_login_view();
+				$data = array();
+
+				if($query = $this->News_model->get_news_preview())
+				{
+					$data['records'] = $query;
+				}
+				$this->load->view('unsucc_login');
+				$this->load->view('home_view', $data);
+				$this->load->view('footer_view');
 			}
 		}
 
 		//Sign ups user
 		function create_user()
 		{
-			$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[20]|min_length[4]');
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+			$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[20]|min_length[4]|is_unique[users.Username]');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.Email]');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[16]|min_length[4]');
 			$this->form_validation->set_rules('password2', 'Password confirmation', 'trim|required|matches[password]');
 		
@@ -242,6 +250,8 @@
 		function goto_shop()
 		{
 			$data['products'] = $this->Products_model->get_all();
+			$data['rarity'] = $this->Products_model->get_rarity();
+			$data['type'] = $this->Products_model->get_type();
 
 			$this->load->view('header_view');
 			$this->load->view('shop_view', $data);
@@ -262,8 +272,15 @@
 				'type' => $product->Equipment_type_Id
 			);
 			$this->cart->insert($insert);
+			$message = "Prece tika pievienota grozam!";
+			echo "<script type='text/javascript'>alert('$message');</script>";
+			$data['products'] = $this->Products_model->get_all();
+			$data['rarity'] = $this->Products_model->get_rarity();
+			$data['type'] = $this->Products_model->get_type();
 
-			redirect('Main_controller/goto_shop');
+			$this->load->view('header_view');
+			$this->load->view('shop_view', $data);
+			$this->load->view('footer_view');
 		}
 
 		//Removes product from cart
@@ -273,7 +290,23 @@
 				'rowid' => $rowid,
 				'qty' => 0
 				));
-			redirect('Main_controller/goto_shop');
+			redirect('Main_controller/goto_grozs');
+		}
+
+		//Search product name
+		function search_product()
+		{
+			$name = $this->input->post('search');
+			if ($query = $this->Products_model->get_searched($name))
+			{
+				$data['products'] = $query;
+				$data['rarity'] = $this->Products_model->get_rarity();
+				$data['type'] = $this->Products_model->get_type();
+			}
+
+			$this->load->view('header_view');
+			$this->load->view('shop_view', $data);
+			$this->load->view('footer_view');
 		}
 
 		//Goes to forum view
@@ -301,6 +334,11 @@
 			if($comments = $this->Forum_model->get_comments())
 			{
 				$data['comments'] = $comments;
+			}
+			$data['user_id'] = $this->Forum_model->get_all_users_who_commented($comments[0]->Post_Id);
+			$data['username'] = array();
+			foreach ($data['user_id'] as $user) {
+				array_push($data['username'] , $this->Forum_model->get_user_by_id($user->User_Id));
 			}
 			$this->load->view('header_view');
 			$this->load->view('post_view', $data);
@@ -339,9 +377,14 @@
 		{
 			$data = array(
 				'User_Id' => $this->session->userdata('Id'),
-				'Comment' => $this->input->post('comment'),
 				'Post_Id' => $this->input->post('post_id')
 			);
+			$Comment = $this->input->post('comment');
+			$disallowed = array(
+				'sūds','sūdu','kroplis'
+			);
+			$Comment = word_censor($Comment,$disallowed,'****');
+			$data['Comment'] = $Comment;
 			$Post_Id = $this->input->post('post_id');
 			$this->Forum_model->insert_comment($data);
 			redirect("Main_controller/show_post/$Post_Id");
@@ -353,6 +396,16 @@
 			$this->Forum_model->delete_comment();
 			$this->load->view('header_view');
 			$this->load->view('succ_comment_delete_view');
+			$this->load->view('footer_view');
+		}
+
+		function goto_grozs()
+		{
+			$data['rarity'] = $this->Products_model->get_rarity();
+			$data['type'] = $this->Products_model->get_type();
+
+			$this->load->view('header_view');
+			$this->load->view('grozs_view',$data);
 			$this->load->view('footer_view');
 		}
 	}

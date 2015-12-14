@@ -1,52 +1,44 @@
 <div class='container'>
+		<?php echo form_open('Main_controller/search_product');?>
+			<div class="form-group has-feedback" style="width:20%";>
+				<input type="text" class="form-control" placeholder="Meklēšana" name="search" />
+				<i class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></i>
+			</div>
+			<?php
+			echo form_submit('action','Meklēt');
+			echo form_close();
+		?>
 	<div id='products'>
 		<ul>
 			<?php foreach ($products as $product):?>
 				<li>
 					<?php echo form_open('Main_controller/add_product_to_cart')?>
 					<div class='name'>Nosaukums: <?php echo $product->Name; ?></div>
-					<div class='type'>Veids: <?php echo $product->Equipment_type_Id?></div>
-					<div class='rarity'>Retums: <?php echo $product->Rarity_Id?></div>
+					<div class='type'>Veids: 
+						<?php foreach ($type as $e_type) {
+							if ($product->Equipment_type_Id == $e_type->Id) {
+								echo $e_type->Type;
+							}
+						}?>
+					</div>
+					<div class='rarity'>Retums: 
+						<?php foreach ($rarity as $e_rarity) {
+							if ($product->Rarity_Id == $e_rarity->Id) {
+								echo $e_rarity->Rarity;
+							}
+						}?>
+					</div>
 					<div class='price'>Cena: €<?php echo $product->Market_price; ?></div>
-					<?php 
+					<?php
 						echo form_hidden('id', $product->Id);
 						if($this->session->userdata('is_logged_in') == true)
 						{
-							echo form_submit('action', 'Pievienot grozam'); 
+							echo form_submit('action', 'Pievienot grozam');
 						}
-						echo form_close(); 
+						echo form_close();
 					?>
 				</li>
 			<?php endforeach;?>
 		</ul>
 	</div>
-	<?php if ($cart = $this->cart->contents()): ?>
-		<div id='cart'>
-			<table>
-				<caption>Grozs</caption>
-				<thead>
-					<tr>
-						<th>Nosaukums</th>
-						<th>Veids</th>
-						<th>Retums</th>
-						<th>Cena</th>
-						<th></th>
-					</tr>
-				</thead>
-				<?php foreach ($cart as $item): ?>
-					<tr>
-						<td><?php echo $item['name']; ?></td>
-						<td><?php echo $item['type']; ?></td>
-						<td><?php echo $item['rarity']; ?></td>
-						<td>€<?php echo $item['subtotal']; ?></td>
-						<td class='remove'><?php echo anchor('Main_controller/remove_from_cart/' .$item['rowid'],'X'); ?></td>
-					</tr>
-				<?php endforeach;?>
-				<tr class='total'>
-					<td colspan="2"><strong>Total</strong></td>
-					<td>€<?php echo $this->cart->total(); ?></td>
-				</tr>
-			</table>
-		</div>
-	<?php endif;?>
 </div>
