@@ -11,8 +11,7 @@
 		</h3>	
 		<p id = "date"><?php echo $comment->Date; ?></p>
 		<p id = "comment"><?php echo $comment->Comment; ?></p>
-		<?php if($this->session->userdata('is_logged_in') == true): ?> 
-			<p><?php echo anchor("Main_controller/delete_comment/$comment->Id" , "Delete")?></p>
+		<?php if($this->session->userdata('Username') == 'admin'): ?> 
 			<p><?php echo form_button('delete',"Dzēst",'onclick="javascript:confirmation_comment(' . $comment->Id . ');"');?></p>
 		<?php endif;?>
 	<?php endforeach; ?>
@@ -30,7 +29,7 @@
 		if($this->session->userdata('is_logged_in') == false) 
 		{
 			$attributes['readonly'] = 'true';
-			$attributes['placeholder'] = 'Lai ievietot komentāru, lūdzu ieejiet sistēmā...';
+			$attributes['placeholder'] = 'Lai ievietot komentāru, lūdzu ieejiet sistēmā.';
 		};
 		echo form_label('Komentārs:', 'comment');
 		echo form_textarea($attributes);

@@ -57,7 +57,7 @@
 		function goto_create_news()
 		{
 			$this->load->view('header_view');
-			$this->load->view('create_news_view');
+			$this->load->view('Administrator/create_news_view');
 			$this->load->view('footer_view');
 		}
 
@@ -86,7 +86,7 @@
 				$data['description'] = $query[0]->Description;
 			}
 			$this->load->view('header_view');
-			$this->load->view('edit_news_view', $data);
+			$this->load->view('Administrator/edit_news_view', $data);
 			$this->load->view('footer_view');
 		}
 
@@ -318,6 +318,9 @@
 		//Search product name
 		function search_product()
 		{
+			$data['products'] = array();
+			$data['rarity'] = array();
+			$data['type'] = array();
 			$name = $this->input->post('search');
 			if ($query = $this->Products_model->get_searched($name))
 			{
@@ -383,7 +386,7 @@
 		function goto_create_post()
 		{
 			$this->load->view('header_view');
-			$this->load->view('create_post_view');
+			$this->load->view('Administrator/create_post_view');
 			$this->load->view('footer_view');
 		}
 
@@ -485,7 +488,7 @@
 			$data['type'] = $this->Products_model->get_type();
 
 			$this->load->view('header_view');
-			$this->load->view('create_equipment_view',$data);
+			$this->load->view('Administrator/create_equipment_view',$data);
 			$this->load->view('footer_view');
 		}
 
@@ -544,7 +547,7 @@
 		function goto_succ_equip_adding()
 		{
 			$this->load->view('header_view');
-			$this->load->view('succ_equipment_added_view');
+			$this->load->view('Administrator/succ_equipment_added_view');
 			$this->load->view('footer_view');
 		}
 
@@ -552,7 +555,7 @@
 		function goto_succ_type_added()
 		{
 			$this->load->view('header_view');
-			$this->load->view('succ_type_added_view');
+			$this->load->view('Administrator/succ_type_added_view');
 			$this->load->view('footer_view');
 		}
 
@@ -560,7 +563,7 @@
 		function goto_succ_rarity_added()
 		{
 			$this->load->view('header_view');
-			$this->load->view('succ_rarity_added_view');
+			$this->load->view('Administrator/succ_rarity_added_view');
 			$this->load->view('footer_view');
 		}
 

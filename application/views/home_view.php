@@ -1,5 +1,5 @@
 <div class="container">
-	<?php if($this->session->userdata('is_logged_in') == true): ?> 
+	<?php if($this->session->userdata('Username') == 'admin'): ?> 
 		<h3><?php echo anchor("Main_controller/goto_create_news" , "Izveidot jaunu ierakstu.")?></h3>
 	<?php endif;?>
 	<hr/>

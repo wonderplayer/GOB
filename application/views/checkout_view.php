@@ -56,6 +56,4 @@
 			</table>
 		</div>
 	<?php endif;?>
-	<pre>
-		<?php print_r($cart)?>
 </div>

@@ -5,7 +5,7 @@
 	<p><?php echo $row->Date ?></p>
 	<div><?php echo $row->Description?></div>
 	<hr>
-	<?php if($this->session->userdata('is_logged_in') == true): ?> 
+	<?php if($this->session->userdata('Username') == 'admin'): ?> 
 		<p><?php echo anchor("Main_controller/delete_news/$row->Id" , "Delete")?></p>
 		<p><?php echo anchor("Main_controller/goto_update_news/$row->Id" , "Update")?></p>
 	<?php endif;?>

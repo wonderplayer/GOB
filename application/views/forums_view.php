@@ -7,7 +7,7 @@
 		<h2><?php echo anchor("Main_controller/show_post/$row->Id" , $row->Title)?></h2>
 		<p id="description"><?php echo ellipsize($row->Description, 50, .5); ?></p>
 		<p><?php echo $row->Date ?></p>
-		<?php if($this->session->userdata('is_logged_in') == true): ?> 
+		<?php if(($this->session->userdata('Username') == 'admin') || ($this->session->userdata('Id') == $row->User_Id)): ?> 
 			<p><?php echo form_button('delete',"Dzēst",'onclick="javascript:confirmation_post(' . $row->Id . ');"');?></p>
 		<?php endif;?>
 		
@@ -15,7 +15,7 @@
 
 	<?php else : ?>
 
-	<h2>Nav jaunumu.</h2>
+	<h2>Nav rakstu.</h2>
 
 	<?php endif; ?>
 </div>
