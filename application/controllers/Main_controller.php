@@ -132,10 +132,18 @@
 		//Sign ups user
 		function create_user()
 		{
-			$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[20]|min_length[4]|is_unique[users.Username]');
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.Email]');
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[16]|min_length[4]');
-			$this->form_validation->set_rules('password2', 'Password confirmation', 'trim|required|matches[password]');
+			$this->form_validation->set_message('required', '%s lauks ir tukšs!');
+			$this->form_validation->set_message('min_length', '%s laukam ir jasatur vismaz 4 rakstzimes!');
+			$this->form_validation->set_message('max_length', '%s lauks nedrīkst būt garāks par 20 rakstzīmēm!');
+			$this->form_validation->set_message('matches', '%s lauks nesakrīt ar lauku Parole!');
+			$this->form_validation->set_message('valid_email', '%s lauks satur nepareizu epastu!');
+			$this->form_validation->set_message('is_unique', '%s ir aizņemts! Lūdzu, ievadiet citu.');
+			//$this->form_validation->set_message('is_unique[users.Username]', '%s lietotājs ar šādu lietotājvārdu jau ir reģistrējies!');
+
+			$this->form_validation->set_rules('username', 'Lietotājvārds', 'trim|required|max_length[20]|min_length[4]|is_unique[users.Username]');
+			$this->form_validation->set_rules('email', 'Epasts', 'trim|required|valid_email|is_unique[users.Email]');
+			$this->form_validation->set_rules('password', 'Parole', 'trim|required|max_length[16]|min_length[4]');
+			$this->form_validation->set_rules('password2', 'Atkārtot paroli', 'trim|required|matches[password]');
 		
 			if($this->form_validation->run() == false)
 			{
