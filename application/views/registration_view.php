@@ -45,7 +45,12 @@
 		echo form_password('password2','','class="form-control"');
 		echo '</div>';
 		echo '</div>';
+		echo '<div class="form-group">';
+		echo '<div class="col-sm-offset-2 col-sm-10">';
 		echo form_submit('submit','Reģistrēties','class="btn btn-default"');
+		echo '</div>';
+		echo '</div>';
+		
 	?>
 	<?php echo validation_errors('<p class="error"></p>'); ?>
 </div>
