@@ -4,6 +4,7 @@
 <script src="<?php echo base_url();?>style/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
 <script src="<?php echo base_url();?>style/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>style/bootstrap-3.3.6-dist/js/npm.js"></script>
+<script src="<?php echo base_url();?>style/bootstrap-3.3.6-dist/js/jquery.js"></script>
 <script>
 	function confirmation_equipment(id){
 		var answer = confirm ("Vai Jūs tiešām gribat izdzēst šo ekipējumu?")
@@ -34,6 +35,9 @@
 		var answer = confirm ("Vai Jūs tiešām gribat izdzēst šo komentāru?")
 		if (answer)
 			location.href=<?php base_url()?>"../delete_comment/" + id
+	}
+	function add_equipment(){
+		alert('Prece tika ievietota grozā.')
 	}
 </script>
 </body>

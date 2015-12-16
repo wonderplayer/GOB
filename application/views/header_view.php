@@ -7,19 +7,9 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>style/bootstrap-3.3.6-dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>style/bootstrap-3.3.6-dist/css/bootstrap-theme.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>style/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>style/bootstrap-3.3.6-dist/css/heroic-features.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>style/bootstrap-3.3.6-dist/css/style.css" />
 	<script src="<?php echo base_url();?>style/jquery/jquery-1.11.3.min.js"></script>
-	<style>
-		label{
-      color: #ffffff;
-		};
-		body{
-			padding-top: 65px;
-		}
-    #products ul{
-      list-style: none;
-    }
-
-	</style>
 </head>
 <body>
 <header>
@@ -46,34 +36,19 @@
   		      <?php echo anchor("Main_controller/goto_forums" , "Forums")?>
   		    </li>
 		    </ul>
-          <!--<form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Epasts" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Parole" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>-->
           <?php if($this->session->userdata('is_logged_in') == true){ 
-
         ?>    
-        <ul class="nav navbar-nav navbar-right">
-          <li class="nav-item">
-            <p style = "color:white;">Hello, <?php echo $this->session->userdata('Username');?> </p>
-          </li>
-          <li class="nav-item">
-            <input type="button" onclick="location.href='<?php echo base_url()?>index.php/Main_controller/logout';" value="Iziet" />
-          </li>
-          <li class="nav-item">
-            <?php echo anchor("Main_controller/goto_grozs",'<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>'); ?>
-          </li>
-        </ul>
+        <div class="nav navbar-nav navbar-right">
+            <b style = "color:white;">Hello, <?php echo $this->session->userdata('Username');?> </b>
+            <input type="button" onclick="location.href='<?php echo base_url()?>index.php/Main_controller/logout';" value="Iziet" class="btn btn-default logout-btn" />
+            <?php echo anchor("Main_controller/goto_grozs",'<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>', 'class="grozs"'); ?>
+        </div>
         <?php
       		} else { ?>
-      			<!--<input type="button" onclick="location.href='<?php echo base_url()?>index.php/Main_controller/goto_login_view';" value="Ieiet" />
-          	<input type="button" onclick="location.href='<?php echo base_url()?>index.php/Main_controller/goto_registration_view';" value="Reģistrēties" />-->
             <?php
+              $label_attributes = array(
+                'class' => 'login-label'
+              );
               $attributes = array(
                 'class' => 'navbar-form navbar-right'
               );
@@ -84,7 +59,10 @@
                 'class' => 'form-control',
                 'placeholder' => 'Epasts'
               );
-              echo form_label('Epasts', 'email');
+              $label_attributes = array(
+                'class' => 'login-label'
+              );
+              echo form_label('Epasts', 'email', $label_attributes);
               echo form_input($attributes);
               echo '</div>';
               echo '<div class="form-group">';
@@ -93,7 +71,7 @@
                 'class' => 'form-control',
                 'placeholder' => 'Parole'
               );
-              echo form_label('Parole', 'password');
+              echo form_label('Parole', 'password', $label_attributes);
               echo form_password($attributes);
               $attributes = array(
                 'name' => 'submit',
@@ -102,7 +80,7 @@
               );
               echo '</div>';
               echo form_submit($attributes);
-              echo anchor('Main_controller/goto_registration_view','Registreties');
+              echo anchor('Main_controller/goto_registration_view','Reģistrēties');
               echo form_close();
             ?>
             <!--
@@ -124,4 +102,6 @@
       </div>
     </nav>
 </header>
-<div class='jumbotron'></div>
+<div class='jumbotron'>
+  <h1 style="text-align:center;">Esiet sveicināti spēles Guns Of Boom mājaslapā!</h1>
+</div>

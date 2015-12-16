@@ -45,15 +45,6 @@
   		      <?php echo anchor("Main_controller/goto_forums" , "Forums")?>
   		    </li>
 		    </ul>
-          <!--<form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Epasts" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Parole" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>-->
           <?php if($this->session->userdata('is_logged_in') == true){ 
 
         ?>    
@@ -70,9 +61,10 @@
         </ul>
         <?php
       		} else { ?>
-      			<!--<input type="button" onclick="location.href='<?php echo base_url()?>index.php/Main_controller/goto_login_view';" value="Ieiet" />
-          	<input type="button" onclick="location.href='<?php echo base_url()?>index.php/Main_controller/goto_registration_view';" value="Reģistrēties" />-->
             <?php
+              $label_attributes = array(
+                'class' => 'login-label'
+              );
               $attributes = array(
                 'class' => 'navbar-form navbar-right'
               );
@@ -83,7 +75,7 @@
                 'class' => 'form-control',
                 'placeholder' => 'Epasts'
               );
-              echo form_label('Epasts', 'email');
+              echo form_label('Epasts', 'email',$label_attributes);
               echo form_input($attributes);
               echo '</div>';
               echo '<div class="form-group">';
@@ -92,7 +84,7 @@
                 'class' => 'form-control',
                 'placeholder' => 'Parole'
               );
-              echo form_label('Parole', 'password');
+              echo form_label('Parole', 'password',$label_attributes);
               echo form_password($attributes);
               $attributes = array(
                 'name' => 'submit',
@@ -101,21 +93,9 @@
               );
               echo '</div>';
               echo form_submit($attributes);
-              echo anchor('Main_controller/goto_registration_view','Registreties');
+              echo anchor('Main_controller/goto_registration_view','Reģistrēties');
               echo form_close();
             ?>
-            <!--
-            //Pareiza login forma
-
-            <form class="navbar-form navbar-right">
-              <div class="form-group">
-                <input type="text" placeholder="Epasts" class="form-control">
-              </div>
-              <div class="form-group">
-                <input type="password" placeholder="Parole" class="form-control">
-              </div>
-              <button type="submit" class="btn btn-success">Sign in</button>
-            </form>-->
           	<?php } ?>
         </div><!--/.navbar-collapse -->
         <p style="color:red;">Epasts vai parole nav pareiza!</p>

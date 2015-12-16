@@ -1,26 +1,51 @@
 <div class="container">
 	<h1>Reģistrācijas forma</h1>
 	<?php
-		echo form_open('Main_controller/create_user');
 		$attributes = array(
-	        'name' => 'username',
-	        'value' => set_value('username', $this->input->post('username')),
-	        'placeholder' => 'Lietotājvārds'
-	    );
-		echo form_label('Lietotājvārds', 'username');
-		echo form_input($attributes);
+			'role' => 'form',
+			'class' => 'form-horizontal'
+		);
+		echo form_open('Main_controller/create_user',$attributes);
+		$label_attributes = array(
+			'class' => 'control-label col-sm-2'
+		);
 		$attributes = array(
-	        'name' => 'email',
-	        'value' => set_value('email', $this->input->post('email')),
-	        'placeholder' => 'Epasts'
-	    );
-		echo form_label('Epasts', 'email');
+			'name' => 'username',
+			'value' => set_value('username', $this->input->post('username')),
+			'placeholder' => 'Lietotājvārds',
+			'class' => 'form-control'
+		);
+		echo '<div class="form-group">';
+		echo form_label('Lietotājvārds', 'username', $label_attributes);
+		echo '<div class="col-sm-10">';
 		echo form_input($attributes);
-		echo form_label('Parole', 'password');
-		echo form_password('password');
-		echo form_label('Atkārtot paroli', 'password2');
-		echo form_password('password2');
-		echo form_submit('submit','Reģistrēties');
+		echo '</div>';
+		echo '</div>';
+		$attributes = array(
+			'name' => 'email',
+			'value' => set_value('email', $this->input->post('email')),
+			'placeholder' => 'Epasts',
+			'class' => 'form-control'
+		);
+		echo '<div class="form-group">';
+		echo form_label('Epasts', 'email', $label_attributes);
+		echo '<div class="col-sm-10">';
+		echo form_input($attributes);
+		echo '</div>';
+		echo '</div>';
+		echo '<div class="form-group">';
+		echo form_label('Parole', 'password', $label_attributes);
+		echo '<div class="col-sm-10">';
+		echo form_password('password','','class="form-control"');
+		echo '</div>';
+		echo '</div>';
+		echo '<div class="form-group">';
+		echo form_label('Atkārtot paroli', 'password2', $label_attributes);
+		echo '<div class="col-sm-10">';
+		echo form_password('password2','','class="form-control"');
+		echo '</div>';
+		echo '</div>';
+		echo form_submit('submit','Reģistrēties','class="btn btn-default"');
 	?>
 	<?php echo validation_errors('<p class="error"></p>'); ?>
 </div>

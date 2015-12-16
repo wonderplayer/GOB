@@ -35,7 +35,7 @@
 		function delete_news()
 		{
 			$this->News_model->delete_news();
-			$this->index();
+			redirect('Main_controller/index');
 		}
 
 		//Updates news in database
@@ -43,10 +43,12 @@
 		{
 			//Id is required to nkow precisely which news are we supposed to update
 			//Tried to push it into array but didn't work
+			date_default_timezone_set('Europe/Helsinki');
 			$Id = $this->input->post('id');
 			$data = array(
 				'Title' => $this->input->post('title'),
 				'Description' => $this->input->post('description'),
+				'Date' => date("Y-m-d H:i:s")
 			);
 
 			$this->News_model->update_news($data, $Id);
@@ -172,88 +174,6 @@
 			redirect('Main_controller/index');
 		}
 
-		//Test
-		//Adding item to shopping cart
-		function Tadd_product_to_cart()
-		{
-			//Adding static item to shopping cart
-			//To add dynamic items needs to be passed values through form
-			$data=array(
-				'id' => '1',
-				'name' => 'Pants',
-				'qty' => 1,
-				'price' => 19.99,
-				'options' => array('Size' => 'medium')
-			);
-			$this->cart->insert($data);
-			echo 'add() called';
-		}
-
-		//Test
-		//Show cart
-		function Tshow_cart()
-		{
-			$cart = $this->cart->contents();
-			echo '<pre>';
-			print_r($cart);
-		}
-
-		//Test
-		//Adds second product to cart
-		function Tadd_product_to_cart2()
-		{
-			//Adding static item to shopping cart
-			//To add dynamic items needs to be passed values through form
-			$data=array(
-				'id' => '2',
-				'name' => 'T-shirt',
-				'qty' => 2,
-				'price' => 7.99,
-				'options' => array('Size' => 'large')
-			);
-			$this->cart->insert($data);
-			echo 'add2() called';
-		}
-
-		//Test
-		//Updates cart
-		function Tupdate_cart()
-		{
-			$data = array(
-				'rowid' => 'df92d3b0122d775e4a531aa55810fb92',
-				'qty' => 1
-				);
-			$this->cart->update($data);
-		}
-
-		//Test
-		//Shows total price in cart
-		function Ttotal_cart()
-		{
-			echo $this->cart->total();
-			echo 'update() called';
-		}
-
-		//Test
-		//Removes product from cart
-		function Tremove_product_from_cart()
-		{
-			$data = array(
-				'rowid' => 'df92d3b0122d775e4a531aa55810fb92',
-				'qty' => 0
-				);
-			$this->cart->update($data);
-			echo 'remove() called';
-		}
-
-		//Test
-		//Destroys cart
-		function Tdestroy_cart()
-		{
-			$this->cart->destroy();
-			echo 'destroy() called';
-		}
-
 		//Goes to shop view
 		function goto_shop()
 		{
@@ -280,15 +200,7 @@
 				'type' => $product->Equipment_type_Id
 			);
 			$this->cart->insert($insert);
-			$message = "Prece tika pievienota grozam!";
-			echo "<script type='text/javascript'>alert('$message');</script>";
-			$data['products'] = $this->Products_model->get_all();
-			$data['rarity'] = $this->Products_model->get_rarity();
-			$data['type'] = $this->Products_model->get_type();
-
-			$this->load->view('header_view');
-			$this->load->view('shop_view', $data);
-			$this->load->view('footer_view');
+			redirect('Main_controller/goto_shop');
 		}
 
 		//Removes product from cart
@@ -394,7 +306,7 @@
 		function goto_create_post()
 		{
 			$this->load->view('header_view');
-			$this->load->view('Administrator/create_post_view');
+			$this->load->view('create_post_view');
 			$this->load->view('footer_view');
 		}
 

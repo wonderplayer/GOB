@@ -1,7 +1,6 @@
 <div class="container">
 	<?php if ($cart = $this->cart->contents()): ?>
-		<div id='cart'>
-			<table>
+			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
 						<th>Nosaukums</th>
@@ -10,10 +9,13 @@
 						<th>Daudzums</th>
 						<th>Cena</th>
 						<th>Kopā</th>
-						<th></th>
 					</tr>
 				</thead>
-			<?php echo form_open('Main_controller/buy');?>
+			<?php $attributes = array(
+				'class' => 'form-inline',
+				'role' => 'form'
+			); ?>
+			<?php echo form_open('Main_controller/buy', $attributes);?>
 				<?php foreach ($cart as $item): ?>
 				<?php
 					echo form_hidden('cart[' . $item['id'] . '][id]', $item['id']);
@@ -45,15 +47,15 @@
 						<td>€<?php echo $item['subtotal']; ?></td>
 					</tr>
 				<?php endforeach;?>
-				<tr class='total'>
-					<td colspan="2"><strong>Kopā</strong></td>
-					<td>€<?php echo $this->cart->total(); ?></td>
-					<td>
-						<input type="submit" value="Pirkt">
-					</td>
+				<tr>
+					<td colspan="6">&nbsp;</td>
 				</tr>
-				<?php echo form_close(); ?>
+				<tr class='total'>
+					<td colspan="5"><strong>Kopā grozā</strong></td>
+					<td>€<?php echo $this->cart->total(); ?></td>
+				</tr>
 			</table>
-		</div>
+			<input type="submit" value="Pirkt" class="btn btn-primary pull-right">
+			<?php echo form_close(); ?>
 	<?php endif;?>
 </div>

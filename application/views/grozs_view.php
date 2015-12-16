@@ -1,7 +1,6 @@
 <div class="container">
 	<?php if ($cart = $this->cart->contents()): ?>
-		<div id='cart'>
-			<table>
+			<table class="table table-bordered table-striped">
 				<caption>Grozs</caption>
 				<thead>
 					<tr>
@@ -11,10 +10,13 @@
 						<th>Daudzums</th>
 						<th>Cena</th>
 						<th>Kopā</th>
-						<th></th>
 					</tr>
 				</thead>
-			<?php echo form_open('Main_controller/update_cart');?>
+			<?php $attributes = array(
+				'class' => 'form-inline',
+				'role' => 'form'
+			); ?>
+			<?php echo form_open('Main_controller/update_cart', $attributes);?>
 				<?php foreach ($cart as $item): ?>
 				<?php
 					echo form_hidden('cart[' . $item['id'] . '][id]', $item['id']);
@@ -47,29 +49,32 @@
 									'name' => 'cart[' . $item['id'] . '][qty]',
 									'value' => $item['qty'],
 									'maxlength' => 2,
-									'style' => "width:20px;"
+									'class' => "form-control"
 								);
 								echo form_input($attributes);
+								$b_attributes = array(
+									'class' => 'btn btn-primary'
+								);
+								echo anchor('Main_controller/remove_from_cart/' .$item['rowid'],'X', $b_attributes);
 							?>
 						</td>
 						<td>€<?php echo $item['price']; ?></td>
 						<td>€<?php echo $item['subtotal']; ?></td>
-						<td class='remove'><?php echo anchor('Main_controller/remove_from_cart/' .$item['rowid'],'X'); ?></td>
 					</tr>
 				<?php endforeach;?>
-				<tr class='total'>
-					<td colspan="2"><strong>Kopā</strong></td>
-					<td>€<?php echo $this->cart->total(); ?></td>
-					<td>
-						<input type="submit" value="Pārrēķināt grozu">
-					</td>
-					<td>
-						<input type="button" onclick="location.href=<?php base_url()?>'checkout'" value="Pasūtīt">
-					</td>
+				<tr>
+					<td colspan="6">&nbsp;</td>
 				</tr>
-				<?php echo form_close(); ?>
+				<tr class='text-right'>
+					<td colspan="5"><strong>Kopā grozā</strong></td>
+					<td>€<?php echo $this->cart->total(); ?></td>
+				</tr>
+				
+				
 			</table>
-		</div>
+			<input type="submit" value="Pārrēķināt grozu" class="btn btn-default">
+			<input type="button" onclick="location.href=<?php base_url()?>'checkout'" value="Pasūtīt" class="btn btn-primary pull-right">
+			<?php echo form_close(); ?>
 	<?php else :?>
 		<h2>Grozs ir tukšs.</h2>
 	<?php endif;?>
