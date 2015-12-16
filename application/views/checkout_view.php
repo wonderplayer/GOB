@@ -55,7 +55,22 @@
 					<td>€<?php echo $this->cart->total(); ?></td>
 				</tr>
 			</table>
+			<div class="form-group">
+				<label for="rarity" class="control-label col-sm-2">Apmaksas veids:</label>
+				<div class="col-sm-10">
+					<select name="apm_veids" id="ap_veids" class="form-control">
+						<option value="MyAcc">Savs konts</option>
+						<option value="Swedbank">Swedbank</option>
+						<option value="Paypal">Paypal</option>
+						<option value="Visa">Visa</option>
+						<option value="MasterCard">Master Card</option>
+					</select>
+				</div>
+			</div>
+			<br>
+			<br>
 			<input type="submit" value="Pirkt" class="btn btn-primary pull-right">
+			
 			<?php echo form_close(); ?>
 	<?php endif;?>
 </div>

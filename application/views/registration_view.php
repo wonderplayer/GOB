@@ -50,7 +50,6 @@
 		echo form_submit('submit','Reģistrēties','class="btn btn-default"');
 		echo '</div>';
 		echo '</div>';
-		
 	?>
 	<?php echo validation_errors('<p class="error"></p>'); ?>
 </div>

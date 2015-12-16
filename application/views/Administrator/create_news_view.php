@@ -1,5 +1,5 @@
 <div class="container">
-	<h2>Create</h2>
+	<h2>Izveidot jaunumu</h2>
 	<?php $attributes = array(
 		'role' => 'form',
 		'class' => 'form-horizontal'

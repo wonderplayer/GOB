@@ -7,7 +7,7 @@
 						<th>Nosaukums</th>
 						<th>Veids</th>
 						<th>Retums</th>
-						<th>Daudzums</th>
+						<th>Daudz.</th>
 						<th>Cena</th>
 						<th>Kopā</th>
 					</tr>

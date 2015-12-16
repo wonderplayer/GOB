@@ -20,7 +20,10 @@
 			'class' =>"btn btn-default",
 			'onclick' => "javascript:confirmation_news($row->Id);"
 		);?>
+		<?php if($this->session->userdata('Username') == 'admin'): ?> 
 		<p><?php echo form_button('delete',"Dzēst",$attributes);?></p>
+		<?php endif;?>
+		
 	<?php endif;?>
 	<?php endforeach; ?>
 	<hr>
