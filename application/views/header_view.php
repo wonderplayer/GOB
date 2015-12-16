@@ -39,7 +39,7 @@
           <?php if($this->session->userdata('is_logged_in') == true){ 
         ?>    
         <div class="nav navbar-nav navbar-right">
-            <b style = "color:white;">Hello, <?php echo $this->session->userdata('Username');?> </b>
+            <b style = "color:white;">Sveiki, <?php echo $this->session->userdata('Username');?>!</b>
             <input type="button" onclick="location.href='<?php echo base_url()?>index.php/Main_controller/logout';" value="Iziet" class="btn btn-default logout-btn" />
             <?php echo anchor("Main_controller/goto_grozs",'<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>', 'class="grozs"'); ?>
         </div>
