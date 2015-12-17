@@ -103,5 +103,5 @@
     </nav>
 </header>
 <div class='jumbotron'>
-  <h1 style="text-align:center;">Esiet sveicināti spēles Guns Of Boom mājaslapā!</h1>
+  <h1 style="text-align:center;">Esiet sveicināti spēles Guns Of Bang mājaslapā!</h1>
 </div>
